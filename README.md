@@ -1,42 +1,6 @@
-<img src="logo_dark.svg" width="300">
+# Splunk SOAR
 
-# SOAR App Template
-
-Welcome to the Splunk SOAR App Template repository. This template helps you quickly create new SOAR apps by handling the basic setup.
-
-## Getting Started
-
-### 1. Create a new repository from this template
-
-Click the "Use this template" button at the top of this repository to create a new repository based on this template.
-
-### 2. Choose repository name
-
-Names should be lowercase and ideally not use characters like underscores or dashes. `ciscosma` is an example repo name. The repository name you choose will be automatically applied to all template files when the setup workflow runs. For example, if you name your repository `ciscosma`, the template files will be renamed accordingly:
-
-- `template_connector.py` → `ciscosma_connector.py`
-- `template.json` → `ciscosma.json`
-- etc...
-
-### 3. Initial Setup (Automatic)
-
-After creating your repository, the `setup-from-template.yml` GitHub workflow will automatically:
-
-- Setup repository files for your connector
-- Update development tools to the latest version
-- Cleanup
-
-### 4. Customize Your App
-
-Once the workflow completes, work can begin:
-
-- Update `your_repo_name.json` to:
-
-  - Modify app information (appid, name, description, vendor, etc...)
-  - Configure authentication parameters
-  - Add logo files
-
-- Start developing 🚀
+Welcome to the open-source repository for Splunk SOAR's cyberintioc App.
 
 ## Contributing
 

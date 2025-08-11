@@ -1,4 +1,4 @@
-# File: template_connector.py
+# File: cyberintioc_connector.py
 #
 # Copyright (c) 2025 Splunk Inc.
 #
@@ -18,16 +18,16 @@ import requests
 from phantom.action_result import ActionResult
 from phantom.base_connector import BaseConnector
 
-from template_consts import (
-    TEMPLATE_CONNECTIVITY_ENDPOINT,
-    TEMPLATE_ERR_CONNECTIVITY_TEST,
-    TEMPLATE_SUCC_CONNECTIVITY_TEST,
+from cyberintioc_consts import (
+    CYBERINTIOC_CONNECTIVITY_ENDPOINT,
+    CYBERINTIOC_ERR_CONNECTIVITY_TEST,
+    CYBERINTIOC_SUCC_CONNECTIVITY_TEST,
 )
 
 
-class TemplateConnector(BaseConnector):
+class CyberintiocConnector(BaseConnector):
     """
-    Template connector class that serves as a starting point for new connectors.
+    Cyberintioc connector class that serves as a starting point for new connectors.
     """
 
     def __init__(self):
@@ -85,16 +85,16 @@ class TemplateConnector(BaseConnector):
         self.save_progress("Connecting to instance...")
 
         # Example test connectivity code
-        endpoint = TEMPLATE_CONNECTIVITY_ENDPOINT
+        endpoint = CYBERINTIOC_CONNECTIVITY_ENDPOINT
         headers = {"Authorization": f"Bearer {self._api_key}"}
 
         ret_val, _ = self._make_rest_call(endpoint, action_result, headers=headers)
 
         if phantom.is_fail(ret_val):
-            self.save_progress(TEMPLATE_ERR_CONNECTIVITY_TEST)
+            self.save_progress(CYBERINTIOC_ERR_CONNECTIVITY_TEST)
             return action_result.get_status()
 
-        self.save_progress(TEMPLATE_SUCC_CONNECTIVITY_TEST)
+        self.save_progress(CYBERINTIOC_SUCC_CONNECTIVITY_TEST)
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def initialize(self):
@@ -139,7 +139,7 @@ if __name__ == "__main__":
 
     pudb.set_trace()
 
-    connector = TemplateConnector()
+    connector = CyberintiocConnector()
     connector.print_progress_message = True
 
     sys.exit(0)

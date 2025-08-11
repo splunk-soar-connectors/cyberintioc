@@ -15,8 +15,8 @@
         "Version X.Y.Z, Month Year"
     ],
     "utctime_updated": "2025-08-01T20:30:47.300351Z",
-    "package_name": "phantom_template",
-    "main_module": "template_connector.py",
+    "package_name": "phantom_cyberintioc",
+    "main_module": "cyberintioc_connector.py",
     "app_config_render": "default",
     "min_phantom_version": "6.3.0",
     "python_version": "3.9, 3.13",
