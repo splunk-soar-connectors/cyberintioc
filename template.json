@@ -1,0 +1,51 @@
+{
+    "appid": "ffffffff-ffff-4fff-afff-ffffffffffff",
+    "name": "Example App Name",
+    "description": "Brief description of the app",
+    "type": "information",
+    "product_vendor": "Vendor Name",
+    "logo": "logo.svg",
+    "logo_dark": "logo_dark.svg",
+    "product_name": "Product Name",
+    "product_version_regex": ".*",
+    "publisher": "Splunk",
+    "license": "Copyright (c) 2025 Splunk Inc.",
+    "app_version": "1.0.1",
+    "latest_tested_versions": [
+        "Version X.Y.Z, Month Year"
+    ],
+    "utctime_updated": "2025-08-01T20:30:47.300351Z",
+    "package_name": "phantom_template",
+    "main_module": "template_connector.py",
+    "app_config_render": "default",
+    "min_phantom_version": "6.3.0",
+    "python_version": "3.9, 3.13",
+    "fips_compliant": true,
+    "app_wizard_version": "1.0.0",
+    "configuration": {
+        "host": {
+            "data_type": "string",
+            "order": 0,
+            "description": "Example Hostname or IP address",
+            "required": true
+        },
+        "api_key": {
+            "data_type": "string",
+            "order": 1,
+            "description": "Example API Key for authentication",
+            "required": true
+        }
+    },
+    "actions": [
+        {
+            "action": "test connectivity",
+            "identifier": "test_connectivity",
+            "description": "Validate the asset configuration for connectivity",
+            "type": "test",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
+        }
+    ]
+}

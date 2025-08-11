@@ -1,0 +1,20 @@
+# Starter connector gitignore
+
+# IDE folders
+.vscode/
+.idea/
+.DS_Store
+
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+venv/
+env/
+
+# Build output
+dist/
+build/
+
+# Secrets
+.env

@@ -1,0 +1,83 @@
+name: Setup Repository
+on:
+  push:
+    branches:
+      - main  # Runs only on the first push (created from template)
+
+permissions:
+  contents: write
+  actions: write
+  repository-projects: write
+  pull-requests: write
+
+jobs:
+  setup_repo:
+    if: ${{ github.event.repository.name != 'connector-template' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Rename template files and update references
+        run: |
+          REPO_NAME=$(basename $GITHUB_REPOSITORY)
+          for file in template_*; do
+            [ -e "$file" ] && mv "$file" "${REPO_NAME}_${file#template_}"
+          done
+
+          for file in template.*; do
+            [ -e "$file" ] && mv "$file" "${REPO_NAME}.${file#template.}"
+          done
+
+          find . -type f \( -name "*.py" -o -name "*.json" \) | xargs grep -l "template" | while read file; do
+            sed -i "s/template-/${REPO_NAME}-/g" "$file"
+            sed -i "s/template_/${REPO_NAME}_/g" "$file"
+            sed -i "s/_template/_${REPO_NAME}/g" "$file"
+            sed -i "s/template\./${REPO_NAME}./g" "$file"
+            sed -i "s/Template/${REPO_NAME^}/g" "$file"
+            sed -i "s/TEMPLATE/${REPO_NAME^^}/g" "$file"
+          done
+
+          if [ -f "CONNECTOR_README.md" ]; then
+            sed -i "s/template App/${REPO_NAME} App/g" CONNECTOR_README.md
+
+            if [ -f "README.md" ]; then
+              rm README.md
+            fi
+            mv CONNECTOR_README.md README.md
+            echo "Updated and renamed CONNECTOR_README.md to README.md"
+          else
+            echo "CONNECTOR_README.md not found, skipping update"
+          fi
+
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "chore(ci): rename template files"
+          git push
+
+      - name: Update dev-cicd-tools to latest version
+        run: |
+          LATEST_TAG=$(git ls-remote --tags --refs https://github.com/phantomcyber/dev-cicd-tools.git |
+                       sort -t '/' -k 3 -V |
+                       tail -n 1 |
+                       awk -F/ '{print $3}')
+
+          echo "Latest dev-cicd-tools tag: $LATEST_TAG"
+
+          # Update pre-commit config to use the latest tag
+          if [ -f ".pre-commit-config.yaml" ]; then
+            sed -i "s|rev: main|rev: $LATEST_TAG|" .pre-commit-config.yaml
+            git add .pre-commit-config.yaml
+            git commit -m "chore(ci): update dev-cicd-tools to latest version ($LATEST_TAG)"
+            git push
+          else
+            echo ".pre-commit-config.yaml file not found, skipping update"
+          fi
+
+      - name: Delete this setup workflow
+        run: |
+          rm -rf .github/workflows/setup-from-template.yml
+          git add .
+          git commit -m "chore(ci): clean up setup work"
+          git push
