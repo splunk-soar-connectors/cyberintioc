@@ -1,18 +1,15 @@
-import json
-from django.http import HttpResponse
-from django.template import loader
-import phantom.app as phantom
-from cyberintioc_connector import CyberintIocConnector
-from cyberintioc_consts import IOC_FEED_DAILY_ENDPOINT
 from datetime import datetime, timezone
 
+import phantom.app as phantom
+from django.http import HttpResponse
+from django.template import loader
 
-def _render_enrichment_view(
-    request, connector, handler, param, template_name, indicator_type, indicator_value
-):
-    action_result = connector.add_action_result(
-        phantom.action_result.ActionResult(dict(param))
-    )
+from cyberintioc_connector import CyberintIocConnector
+from cyberintioc_consts import IOC_FEED_DAILY_ENDPOINT
+
+
+def _render_enrichment_view(request, connector, handler, param, template_name, indicator_type, indicator_value):
+    action_result = connector.add_action_result(phantom.action_result.ActionResult(dict(param)))
     result = handler(param)
     if phantom.is_fail(result):
         return HttpResponse(
@@ -105,9 +102,7 @@ def ioc_view(request, **kwargs):
     connector.handle_action = lambda x: x
     connector.initialize()
 
-    action_result = connector.add_action_result(
-        phantom.action_result.ActionResult(dict())
-    )
+    action_result = connector.add_action_result(phantom.action_result.ActionResult(dict()))
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     offset = 0
@@ -116,9 +111,7 @@ def ioc_view(request, **kwargs):
 
     while True:
         ioc_args = f"?limit={limit}&offset={offset}&format=json"
-        ret_val, iocs = connector._make_rest_call(
-            f"{IOC_FEED_DAILY_ENDPOINT}/{today}{ioc_args}", action_result
-        )
+        ret_val, iocs = connector._make_rest_call(f"{IOC_FEED_DAILY_ENDPOINT}/{today}{ioc_args}", action_result)
         if phantom.is_fail(ret_val) or not iocs:
             break
         all_iocs.extend(iocs)

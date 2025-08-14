@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Daily IoC Feed</title>
-<style>
+  <head>
+    <title>Daily IoC Feed</title>
+    <style>
     body {
         font-family: Arial, sans-serif;
     }
@@ -18,34 +18,30 @@
     th {
         background-color: #f2f2f2;
     }
-</style>
-</head>
-<body>
-
-<h1>Daily IoC Feed</h1>
-
-<form method="get">
-    <label for="date">Select Date:</label>
-    <input type="date" id="date" name="Date">
-    <input type="submit" value="Fetch IOCs">
-</form>
-
-{% if iocs %}
-    <table>
+    </style>
+  </head>
+  <body>
+    <h1>Daily IoC Feed</h1>
+    <form method="get">
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" name="Date">
+      <input type="submit" value="Fetch IOCs">
+    </form>
+    {% if iocs %}
+      <table>
         <tr>
-            <th>Type</th>
-            <th>Value</th>
+          <th>Type</th>
+          <th>Value</th>
         </tr>
         {% for ioc in iocs %}
-        <tr>
+          <tr>
             <td>{{ ioc.ioc_type }}</td>
             <td>{{ ioc.ioc_value }}</td>
-        </tr>
+          </tr>
         {% endfor %}
-    </table>
-{% else %}
-    <p>No IoCs found for the selected date.</p>
-{% endif %}
-
-</body>
+      </table>
+    {% else %}
+      <p>No IoCs found for the selected date.</p>
+    {% endif %}
+  </body>
 </html>

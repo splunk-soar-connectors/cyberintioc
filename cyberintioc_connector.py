@@ -1,24 +1,25 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 # -----------------------------------------
 # Phantom App Connector python file
 # -----------------------------------------
 
+import json
+from datetime import datetime, timezone
+
 import phantom.app as phantom
+import requests
+from bs4 import BeautifulSoup
 from phantom.action_result import ActionResult
 from phantom.base_connector import BaseConnector
+
 from cyberintioc_consts import (
-    IOC_FEED_DAILY_ENDPOINT,
     IOC_ENRICH_DOMAIN_ENDPOINT,
-    IOC_ENRICH_URL_ENDPOINT,
     IOC_ENRICH_IPV4_ENDPOINT,
     IOC_ENRICH_SHA256_ENDPOINT,
+    IOC_ENRICH_URL_ENDPOINT,
+    IOC_FEED_DAILY_ENDPOINT,
     IOC_FEED_TEST_CONNECTION_ENDPOINT,
 )
-import requests
-import json
-from bs4 import BeautifulSoup
-from datetime import datetime, timezone
 
 
 class RetVal(tuple):
@@ -28,7 +29,7 @@ class RetVal(tuple):
 
 class CyberintIocConnector(BaseConnector):
     def __init__(self):
-        super(CyberintIocConnector, self).__init__()
+        super().__init__()
         self._state = None
         self._base_url = None
         self._access_token = None
@@ -65,9 +66,7 @@ class CyberintIocConnector(BaseConnector):
                 resp_json = r.json()
             except Exception as e:
                 return RetVal(
-                    action_result.set_status(
-                        phantom.APP_ERROR, f"Unable to parse JSON response. Error: {e}"
-                    ),
+                    action_result.set_status(phantom.APP_ERROR, f"Unable to parse JSON response. Error: {e}"),
                     None,
                 )
             if 200 <= r.status_code < 399:
@@ -78,9 +77,7 @@ class CyberintIocConnector(BaseConnector):
         if "html" in r.headers.get("Content-Type", ""):
             try:
                 soup = BeautifulSoup(r.text, "html.parser")
-                error_text = "\n".join(
-                    [x.strip() for x in soup.text.split("\n") if x.strip()]
-                )
+                error_text = "\n".join([x.strip() for x in soup.text.split("\n") if x.strip()])
             except Exception:
                 error_text = "Cannot parse error details"
             message = f"Status Code: {r.status_code}. Data from server:\n{error_text}\n"
@@ -90,9 +87,7 @@ class CyberintIocConnector(BaseConnector):
             if r.status_code == 200:
                 return RetVal(phantom.APP_SUCCESS, {})
             return RetVal(
-                action_result.set_status(
-                    phantom.APP_ERROR, "Empty response and no information in the header"
-                ),
+                action_result.set_status(phantom.APP_ERROR, "Empty response and no information in the header"),
                 None,
             )
 
@@ -113,22 +108,16 @@ class CyberintIocConnector(BaseConnector):
             request_func = getattr(requests, method)
         except AttributeError:
             return RetVal(
-                action_result.set_status(
-                    phantom.APP_ERROR, f"Invalid method: {method}"
-                ),
+                action_result.set_status(phantom.APP_ERROR, f"Invalid method: {method}"),
                 None,
             )
 
         url = self._base_url + endpoint
         try:
-            r = request_func(
-                url, verify=config.get("verify_server_cert", False), **kwargs
-            )
+            r = request_func(url, verify=config.get("verify_server_cert", False), **kwargs)
         except Exception as e:
             return RetVal(
-                action_result.set_status(
-                    phantom.APP_ERROR, f"Error Connecting to server. Details: {e}"
-                ),
+                action_result.set_status(phantom.APP_ERROR, f"Error Connecting to server. Details: {e}"),
                 None,
             )
 
@@ -137,9 +126,7 @@ class CyberintIocConnector(BaseConnector):
     def _handle_test_connectivity(self, param):
         action_result = self.add_action_result(ActionResult(dict(param)))
         self.save_progress("Connecting to endpoint...")
-        ret_val, response = self._make_rest_call(
-            IOC_FEED_TEST_CONNECTION_ENDPOINT, action_result, method="get"
-        )
+        ret_val, response = self._make_rest_call(IOC_FEED_TEST_CONNECTION_ENDPOINT, action_result, method="get")
         if phantom.is_fail(ret_val):
             self.save_progress("Test Connectivity Failed.")
             return action_result.get_status()
@@ -148,9 +135,7 @@ class CyberintIocConnector(BaseConnector):
 
     def _handle_enrich_sha256(self, param):
         action_result = self.add_action_result(ActionResult(dict(param)))
-        ret_val, response = self._make_rest_call(
-            f"{IOC_ENRICH_SHA256_ENDPOINT}?value={param['Hash']}", action_result
-        )
+        ret_val, response = self._make_rest_call(f"{IOC_ENRICH_SHA256_ENDPOINT}?value={param['Hash']}", action_result)
         if phantom.is_fail(ret_val):
             return action_result.get_status()
         action_result.add_data(response)
@@ -158,9 +143,7 @@ class CyberintIocConnector(BaseConnector):
 
     def _handle_enrich_ipv4(self, param):
         action_result = self.add_action_result(ActionResult(dict(param)))
-        ret_val, response = self._make_rest_call(
-            f"{IOC_ENRICH_IPV4_ENDPOINT}?value={param['IP']}", action_result
-        )
+        ret_val, response = self._make_rest_call(f"{IOC_ENRICH_IPV4_ENDPOINT}?value={param['IP']}", action_result)
         if phantom.is_fail(ret_val):
             return action_result.get_status()
         action_result.add_data(response)
@@ -168,9 +151,7 @@ class CyberintIocConnector(BaseConnector):
 
     def _handle_enrich_url(self, param):
         action_result = self.add_action_result(ActionResult(dict(param)))
-        ret_val, response = self._make_rest_call(
-            f"{IOC_ENRICH_URL_ENDPOINT}?value={param['URL']}", action_result
-        )
+        ret_val, response = self._make_rest_call(f"{IOC_ENRICH_URL_ENDPOINT}?value={param['URL']}", action_result)
         if phantom.is_fail(ret_val):
             return action_result.get_status()
         action_result.add_data(response)
@@ -178,9 +159,7 @@ class CyberintIocConnector(BaseConnector):
 
     def _handle_enrich_domain(self, param):
         action_result = self.add_action_result(ActionResult(dict(param)))
-        ret_val, response = self._make_rest_call(
-            f"{IOC_ENRICH_DOMAIN_ENDPOINT}?value={param['Domain']}", action_result
-        )
+        ret_val, response = self._make_rest_call(f"{IOC_ENRICH_DOMAIN_ENDPOINT}?value={param['Domain']}", action_result)
         if phantom.is_fail(ret_val):
             return action_result.get_status()
         action_result.add_data(response)
@@ -196,9 +175,7 @@ class CyberintIocConnector(BaseConnector):
         }
         status, message, container_id = self.save_container(container)
         if phantom.is_fail(status):
-            self.debug_print(
-                f"Could not create container (likely already exists): {message}"
-            )
+            self.debug_print(f"Could not create container (likely already exists): {message}")
 
         if not container_id:
             sdi = f"cyberint_ioc_feed_{today}"
@@ -226,9 +203,7 @@ class CyberintIocConnector(BaseConnector):
         while True:
             self.save_progress(f"Fetching IOCs, offset: {offset}")
             ioc_args = f"?limit={limit}&offset={offset}&format=json"
-            ret_val, iocs = self._make_rest_call(
-                f"{IOC_FEED_DAILY_ENDPOINT}/{today}{ioc_args}", action_result
-            )
+            ret_val, iocs = self._make_rest_call(f"{IOC_FEED_DAILY_ENDPOINT}/{today}{ioc_args}", action_result)
             if phantom.is_fail(ret_val):
                 return action_result.get_status()
 
@@ -278,8 +253,8 @@ class CyberintIocConnector(BaseConnector):
 
 
 if __name__ == "__main__":
-    import sys
     import argparse
+    import sys
 
     parser = argparse.ArgumentParser()
     parser.add_argument("input_test_json", help="Input Test JSON file")
