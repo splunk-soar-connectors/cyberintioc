@@ -1,0 +1,62 @@
+<!--
+ Copyright (c) 2025 Splunk Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Daily IoC Feed</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Daily IoC Feed</h1>
+    <form method="get">
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" name="Date">
+      <input type="submit" value="Fetch IOCs">
+    </form>
+    {% if iocs %}
+      <table>
+        <tr>
+          <th>Type</th>
+          <th>Value</th>
+        </tr>
+        {% for ioc in iocs %}
+          <tr>
+            <td>{{ ioc.ioc_type }}</td>
+            <td>{{ ioc.ioc_value }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>No IoCs found for the selected date.</p>
+    {% endif %}
+  </body>
+</html>

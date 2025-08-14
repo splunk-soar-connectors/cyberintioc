@@ -1,0 +1,17 @@
+<dashboard>
+  <label>Daily IOC Feed</label>
+  <row>
+    <panel>
+      <html>
+        <div id="custom_view"></div>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html id="ioc_view">
+
+      </html>
+    </panel>
+  </row>
+</dashboard>
