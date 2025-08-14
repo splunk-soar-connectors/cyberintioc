@@ -1,8 +1,4 @@
-# Cyberint Splunk SOAR connector
-
-Welcome to the open-source repository for Splunk SOAR's Cyberint IoC App.
-
-## Cyberint IoC
+# Cyberint IoC
 
 Publisher: Check Point Cyberint \
 Connector Version: 1.0.0 \
@@ -12,13 +8,15 @@ Minimum Product Version: 6.4.0
 
 Cyberint and Splunk SOAR integration is here to simplify and streamline indicators for Splunk SOAR, bring enriched threat intelligence from the Argos Edge™ Digital Risk Protection Platform into Splunk SOAR and automatically implement playbooks and incident processes.
 
-### Configuration Parameters
+### Configuration variables
 
-PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
---------- | -------- | ----------- | ---- | --------
-**API Base URL** | required | Base URL of the Cyberint API | string | `url`
-**Access Token** | required | API Access Token for authentication | password |
-**Company Name** | required | The name of the company | string |
+This table lists the configuration variables required to operate Cyberint IoC. These variables are specified when configuring a Cyberint IoC asset in Splunk SOAR.
+
+VARIABLE | REQUIRED | TYPE | DESCRIPTION
+-------- | -------- | ---- | -----------
+**base_url** | required | string | Base URL of the Cyberint API |
+**access_token** | required | password | API Access Token for authentication |
+**customer_name** | required | string | The name of the company |
 
 ### Supported Actions
 
@@ -55,17 +53,17 @@ Read only: **True**
 
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 --------- | -------- | ----------- | ---- | --------
-**Hash** | required | SHA256 hash to enrich | string | `hash` `sha256`
+**Hash** | required | SHA256 hash to enrich | string | |
 
 #### Action Output
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
-action_result.status | string | | success failed
-action_result.parameter.Hash | string | `hash` `sha256` |
-action_result.message | string | |
-summary.total_objects | numeric | | 1
-summary.total_objects_successful | numeric | | 1
+action_result.parameter.Hash | string | | |
+summary.total_objects | numeric | | |
+action_result.status | string | | |
+action_result.message | string | | |
+summary.total_objects_successful | numeric | | |
 
 ## action: 'ioc - enrich ipv4'
 
@@ -78,17 +76,17 @@ Read only: **True**
 
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 --------- | -------- | ----------- | ---- | --------
-**IP** | required | IPv4 address to enrich | string | `ip` `ipv4`
+**IP** | required | IPv4 address to enrich | string | |
 
 #### Action Output
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
-action_result.status | string | | success failed
-action_result.parameter.IP | string | `ip` `ipv4` |
-action_result.message | string | |
-summary.total_objects | numeric | | 1
-summary.total_objects_successful | numeric | | 1
+action_result.parameter.IP | string | | |
+summary.total_objects | numeric | | |
+action_result.status | string | | |
+action_result.message | string | | |
+summary.total_objects_successful | numeric | | |
 
 ## action: 'ioc - enrich url'
 
@@ -101,17 +99,17 @@ Read only: **True**
 
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 --------- | -------- | ----------- | ---- | --------
-**URL** | required | URL to enrich | string | `url`
+**URL** | required | URL to enrich | string | |
 
 #### Action Output
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
-action_result.status | string | | success failed
-action_result.parameter.URL | string | `url` |
-action_result.message | string | |
-summary.total_objects | numeric | | 1
-summary.total_objects_successful | numeric | | 1
+action_result.parameter.URL | string | | |
+summary.total_objects | numeric | | |
+action_result.status | string | | |
+action_result.message | string | | |
+summary.total_objects_successful | numeric | | |
 
 ## action: 'ioc - enrich domain'
 
@@ -124,17 +122,17 @@ Read only: **True**
 
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 --------- | -------- | ----------- | ---- | --------
-**Domain** | required | Domain to enrich | string | `domain`
+**Domain** | required | Domain to enrich | string | |
 
 #### Action Output
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
-action_result.status | string | | success failed
-action_result.parameter.Domain | string | `domain` |
-action_result.message | string | |
-summary.total_objects | numeric | | 1
-summary.total_objects_successful | numeric | | 1
+action_result.parameter.Domain | string | | |
+summary.total_objects | numeric | | |
+action_result.status | string | | |
+action_result.message | string | | |
+summary.total_objects_successful | numeric | | |
 
 ## action: 'on poll'
 
@@ -151,17 +149,11 @@ No parameters are required for this action
 
 No Output
 
-## Contributing
-
-Please have a look at our [Contributing Guide](https://github.com/Splunk-SOAR-Apps/.github/blob/main/.github/CONTRIBUTING.md) for guidelines if you are interested in contributing, raising issues, or learning more about open-source SOAR apps.
-
-Please also review our [Conventions](https://github.com/Splunk-SOAR-Apps/.github/blob/main/.github/CONTRIBUTING.md) to ensure you follow up-to-date standards.
-
 ______________________________________________________________________
 
 Auto-generated Splunk SOAR Connector documentation.
 
-Copyright 2025 Check Point Cyberint.
+Copyright 2025 Splunk Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
