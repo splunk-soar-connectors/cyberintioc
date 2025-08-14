@@ -1,0 +1,25 @@
+{% extends 'widgets/widget_template.html' %}
+{% load render_antd_widget %}
+
+{% block custom_title %}
+<h4 class="widget-title">
+  <span class="widget-title-text">SHA256 Enrichment for {{ indicator_value }}</span>
+</h4>
+{% endblock %}
+
+{% block widget_content %}
+<div style="padding: 15px; overflow: auto;">
+  {% if data %}
+    <pre>{{ data.0|json_script:"enrichment-data" }}</pre>
+    <script>
+      var data = JSON.parse(document.getElementById('enrichment-data').textContent);
+      document.addEventListener('DOMContentLoaded', function() {
+        var container = document.querySelector('.widget-content pre');
+        container.innerHTML = JSON.stringify(data, null, 2);
+      });
+    </script>
+  {% else %}
+    <p>No enrichment data found.</p>
+  {% endif %}
+</div>
+{% endblock %}
