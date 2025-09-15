@@ -1,9 +1,9 @@
 # Cyberint IoC
 
-Publisher: Check Point Cyberint \
-Connector Version: 1.0.0 \
-Product Vendor: Check Point Cyberint \
-Product Name: Cyberint IoC \
+Publisher: Check Point Cyberint <br>
+Connector Version: 1.0.0 <br>
+Product Vendor: Check Point Cyberint <br>
+Product Name: Cyberint IoC <br>
 Minimum Product Version: 6.4.0
 
 Cyberint and Splunk SOAR integration is here to simplify and streamline indicators for Splunk SOAR, bring enriched threat intelligence from the Argos Edge™ Digital Risk Protection Platform into Splunk SOAR and automatically implement playbooks and incident processes.
@@ -20,18 +20,18 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration \
-[ioc - enrich sha256](#action-ioc---enrich-sha256) - Enrich a SHA256 hash \
-[ioc - enrich ipv4](#action-ioc---enrich-ipv4) - Enrich an IPv4 address \
-[ioc - enrich url](#action-ioc---enrich-url) - Enrich a URL \
-[ioc - enrich domain](#action-ioc---enrich-domain) - Enrich a domain \
+[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration <br>
+[ioc - enrich sha256](#action-ioc---enrich-sha256) - Enrich a SHA256 hash <br>
+[ioc - enrich ipv4](#action-ioc---enrich-ipv4) - Enrich an IPv4 address <br>
+[ioc - enrich url](#action-ioc---enrich-url) - Enrich a URL <br>
+[ioc - enrich domain](#action-ioc---enrich-domain) - Enrich a domain <br>
 [on poll](#action-on-poll) - Ingest the daily IOC feed
 
 ## action: 'test connectivity'
 
 Validate the asset configuration for connectivity using supplied configuration
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -46,7 +46,7 @@ No Output
 
 Enrich a SHA256 hash
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -69,7 +69,7 @@ summary.total_objects_successful | numeric | | |
 
 Enrich an IPv4 address
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -92,7 +92,7 @@ summary.total_objects_successful | numeric | | |
 
 Enrich a URL
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -115,7 +115,7 @@ summary.total_objects_successful | numeric | | |
 
 Enrich a domain
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -138,7 +138,7 @@ summary.total_objects_successful | numeric | | |
 
 Ingest the daily IOC feed
 
-Type: **ingest** \
+Type: **ingest** <br>
 Read only: **True**
 
 #### Action Parameters

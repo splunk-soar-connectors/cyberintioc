@@ -1,5 +1,5 @@
 {
-    "appid": "8F9E2A5C-B1D4-4E7A-9C3F-6B8D5A2E4F71",
+    "appid": "8f9e2a5c-b1d4-4e7a-9c3f-6b8d5a2e4f71",
     "name": "Cyberint IoC",
     "description": "Cyberint and Splunk SOAR integration is here to simplify and streamline indicators for Splunk SOAR, bring enriched threat intelligence from the Argos Edge\u2122 Digital Risk Protection Platform into Splunk SOAR and automatically implement playbooks and incident processes.",
     "type": "endpoint",
@@ -236,11 +236,9 @@
         }
     ],
     "pip39_dependencies": {
-        "wheel": [
-            {
-                "module": "typing_extensions",
-                "input_file": "wheels/py3/typing_extensions-4.14.1-py3-none-any.whl"
-            }
-        ]
+        "wheel": []
+    },
+    "pip313_dependencies": {
+        "wheel": []
     }
 }
