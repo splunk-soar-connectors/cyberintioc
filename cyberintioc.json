@@ -12,7 +12,7 @@
     "publisher": "Check Point Cyberint",
     "license": "Copyright (c) Check Point Cyberint, 2025",
     "app_version": "1.0.0",
-    "utctime_updated": "2025-08-06T12:00:00Z",
+    "utctime_updated": "2025-09-15T21:01:39.225872Z",
     "package_name": "phantom_cyberintioc",
     "main_module": "cyberintioc_connector.py",
     "min_phantom_version": "6.4.0",
