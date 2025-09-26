@@ -1,1 +1,2 @@
 **Unreleased**
+* Update svg files
