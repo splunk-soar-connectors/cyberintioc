@@ -1,7 +1,7 @@
 # Cyberint IoC
 
 Publisher: Check Point Cyberint <br>
-Connector Version: 1.0.0 <br>
+Connector Version: 1.0.1 <br>
 Product Vendor: Check Point Cyberint <br>
 Product Name: Cyberint IoC <br>
 Minimum Product Version: 6.4.0
