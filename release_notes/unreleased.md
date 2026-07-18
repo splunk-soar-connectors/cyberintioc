@@ -1,3 +1,3 @@
 **Unreleased**
 
-* - Verify Cyberint API server certificates by default.
+* Verify Cyberint API server certificates by default.
