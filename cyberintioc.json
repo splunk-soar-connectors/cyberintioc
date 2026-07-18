@@ -18,6 +18,14 @@
     "min_phantom_version": "6.4.0",
     "app_wizard_version": "1.0.0",
     "configuration": {
+        "verify_server_cert": {
+            "description": "Verify the Cyberint API server certificate",
+            "data_type": "boolean",
+            "required": false,
+            "default": true,
+            "order": 3,
+            "name": "Verify Server Certificate"
+        },
         "base_url": {
             "description": "Base URL of the Cyberint API",
             "data_type": "string",

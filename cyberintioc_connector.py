@@ -127,7 +127,7 @@ class CyberintIocConnector(BaseConnector):
 
         url = self._base_url + endpoint
         try:
-            r = request_func(url, verify=config.get("verify_server_cert", False), **kwargs)
+            r = request_func(url, verify=config.get("verify_server_cert", True), **kwargs)
         except Exception as e:
             return RetVal(
                 action_result.set_status(phantom.APP_ERROR, f"Error Connecting to server. Details: {e}"),
