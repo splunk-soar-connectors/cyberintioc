@@ -14,6 +14,7 @@ This table lists the configuration variables required to operate Cyberint IoC. T
 
 VARIABLE | REQUIRED | TYPE | DESCRIPTION
 -------- | -------- | ---- | -----------
+**verify_server_cert** | optional | boolean | Verify the Cyberint API server certificate |
 **base_url** | required | string | Base URL of the Cyberint API |
 **access_token** | required | password | API Access Token for authentication |
 **customer_name** | required | string | The name of the company |
@@ -153,7 +154,7 @@ ______________________________________________________________________
 
 Auto-generated Splunk SOAR Connector documentation.
 
-Copyright 2025 Splunk Inc.
+Copyright 2026 Splunk Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

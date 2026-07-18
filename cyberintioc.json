@@ -10,7 +10,7 @@
     "python_version": "3.9, 3.13",
     "product_version_regex": ".*",
     "publisher": "Check Point Cyberint",
-    "license": "Copyright (c) Check Point Cyberint, 2025",
+    "license": "Copyright (c) Check Point Cyberint, 2025-2026",
     "app_version": "1.0.2",
     "utctime_updated": "2025-10-20T18:21:26.050290Z",
     "package_name": "phantom_cyberintioc",
