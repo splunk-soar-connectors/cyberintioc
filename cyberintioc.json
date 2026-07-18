@@ -7,7 +7,7 @@
     "logo": "logo_cyberintioc.svg",
     "logo_dark": "logo_cyberintioc_dark.svg",
     "product_name": "Cyberint IoC",
-    "python_version": "3",
+    "python_version": "3.9, 3.13",
     "product_version_regex": ".*",
     "publisher": "Check Point Cyberint",
     "license": "Copyright (c) Check Point Cyberint, 2025",
