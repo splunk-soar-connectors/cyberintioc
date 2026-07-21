@@ -1,3 +1,3 @@
 **Unreleased**
 
-- Removed obsolete CI workflow templates.
+* Removed obsolete CI workflow templates.
