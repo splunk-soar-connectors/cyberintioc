@@ -127,7 +127,7 @@ class CyberintIocConnector(BaseConnector):
 
         url = self._base_url + endpoint
         try:
-            r = request_func(url, verify=config.get("verify_server_cert", True), **kwargs)
+            r = request_func(url, verify=config.get("verify_server_cert") is not False, **kwargs)
         except Exception as e:
             return RetVal(
                 action_result.set_status(phantom.APP_ERROR, f"Error Connecting to server. Details: {e}"),
@@ -194,7 +194,7 @@ class CyberintIocConnector(BaseConnector):
             sdi = f"cyberint_ioc_feed_{today}"
             url = f"{self.get_phantom_base_url()}/rest/container?_filter_source_data_identifier='{sdi}'"
             try:
-                r = self._get_requests_session().get(url, verify=False)
+                r = self._get_requests_session().get(url, verify=True)
                 r.raise_for_status()
                 data = r.json()
                 if data.get("count", 0) > 0:
